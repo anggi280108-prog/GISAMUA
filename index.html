@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GISAMUA Makeup Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #fce7f3 0%, #f3e8ff 100%);
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 50%, #f3e8ff 100%);
+        }
+        
+        .service-card {
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(236, 72, 153, 0.15);
+        }
+        
+        .nav-link {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .nav-link:hover {
+            color: #ec4899;
+            transform: translateY(-2px);
+        }
+        
+        .nav-link.active {
+            color: #ec4899;
+            font-weight: 600;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.3);
+        }
+        
+        .floating-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        .page-transition {
+            animation: pageSlideIn 0.5s ease-out;
+        }
+        
+        @keyframes pageSlideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body class="font-sans">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md shadow-lg z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-pink-600 cursor-pointer" onclick="showPage('home')">💄 GISAMUA</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <span class="nav-link text-gray-700 font-medium active" onclick="showPage('home')">Beranda</span>
+                    <span class="nav-link text-gray-700 font-medium" onclick="showPage('services')">Layanan</span>
+                    <span class="nav-link text-gray-700 font-medium" onclick="showPage('booking')">Pemesanan</span>
+                    <span class="nav-link text-gray-700 font-medium" onclick="showPage('contact')">Kontak</span>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-pink-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 py-2 space-y-2">
+                <span class="block py-2 text-gray-700 cursor-pointer" onclick="showPage('home')">Beranda</span>
+                <span class="block py-2 text-gray-700 cursor-pointer" onclick="showPage('services')">Layanan</span>
+                <span class="block py-2 text-gray-700 cursor-pointer" onclick="showPage('booking')">Pemesanan</span>
+                <span class="block py-2 text-gray-700 cursor-pointer" onclick="showPage('contact')">Kontak</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home" class="page active">
+        <!-- Hero Section -->
+        <section class="hero-bg min-h-screen flex items-center">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="fade-in">
+                        <h1 class="text-5xl md:text-6xl font-bold text-gray-800 mb-6">
+                            Tampil <span class="text-pink-500">Cantik</span> di Hari Spesialmu
+                        </h1>
+                        <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                            Wujudkan makeup impianmu dengan sentuhan profesional dari makeup artist berpengalaman. 
+                            Dari makeup natural hingga glamour, kami siap membuat Anda tampil memukau.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button onclick="showPage('booking')" class="btn-primary text-white px-8 py-4 rounded-full font-semibold text-lg">
+                                Pesan Sekarang
+                            </button>
+                            <button onclick="showPage('services')" class="border-2 border-pink-500 text-pink-500 px-8 py-4 rounded-full font-semibold text-lg hover:bg-pink-50 transition-all">
+                                Lihat Layanan
+                            </button>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div class="floating-animation">
+                            <div class="w-80 h-80 mx-auto bg-gradient-to-br from-pink-200 to-purple-200 rounded-full flex items-center justify-center text-8xl">
+                                💅
+                            </div>
+                        </div>
+                        <div class="absolute -top-4 -right-4 w-20 h-20 bg-pink-300 rounded-full opacity-60 floating-animation" style="animation-delay: 0.5s;"></div>
+                        <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-purple-300 rounded-full opacity-60 floating-animation" style="animation-delay: 1s;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="fade-in">
+                        <div class="text-6xl mb-6">✨</div>
+                        <h2 class="text-4xl font-bold text-gray-800 mb-6">Tentang GISAMUA</h2>
+                        <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                            GISAMUA Makeup Studio adalah studio makeup profesional yang berdedikasi untuk membuat setiap klien tampil cantik dan percaya diri. 
+                            Dengan pengalaman bertahun-tahun di industri kecantikan, kami menggunakan produk berkualitas tinggi dan teknik terkini.
+                        </p>
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-pink-600">500+</div>
+                                <div class="text-gray-600">Klien Puas</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-pink-600">3+</div>
+                                <div class="text-gray-600">Tahun Pengalaman</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fade-in">
+                        <div class="bg-gradient-to-br from-pink-100 to-purple-100 rounded-2xl p-8">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-4">Mengapa Memilih Kami?</h3>
+                            <ul class="space-y-3 text-gray-600">
+                                <li class="flex items-center">
+                                    <span class="text-pink-500 mr-3">💄</span>
+                                    Makeup artist bersertifikat dan berpengalaman
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="text-pink-500 mr-3">✨</span>
+                                    Produk makeup premium dan berkualitas tinggi
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="text-pink-500 mr-3">🎨</span>
+                                    Konsultasi gratis untuk menentukan style terbaik
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="text-pink-500 mr-3">📱</span>
+                                    Layanan fleksibel di studio atau lokasi Anda
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Services Page -->
+    <div id="services" class="page">
+        <section class="py-20 gradient-bg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in">
+                    <h1 class="text-5xl font-bold text-gray-800 mb-4">Layanan Makeup Kami</h1>
+                    <p class="text-xl text-gray-600">Pilih paket makeup yang sesuai dengan kebutuhan dan budget Anda</p>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8 mb-16">
+                    <!-- Wedding Makeup -->
+                    <div class="service-card bg-white rounded-2xl p-8 text-center fade-in shadow-lg">
+                        <div class="text-6xl mb-6">👰</div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Wedding Makeup</h3>
+                        <p class="text-gray-600 mb-6">Makeup pernikahan yang tahan lama dan photogenic untuk hari bahagia Anda</p>
+                        <div class="text-3xl font-bold text-pink-600 mb-6">Rp 1.500.000</div>
+                        <ul class="text-left text-gray-600 space-y-2 mb-6">
+                            <li>✨ Konsultasi makeup</li>
+                            <li>✨ Makeup trial</li>
+                            <li>✨ Makeup hari H</li>
+                            <li>✨ Touch up 2x</li>
+                            <li>✨ Hairdo simple</li>
+                        </ul>
+                        <button onclick="selectService('Wedding Makeup')" class="w-full btn-primary text-white py-3 rounded-full font-semibold">
+                            Pilih Paket
+                        </button>
+                    </div>
+
+                    <!-- Party Makeup -->
+                    <div class="service-card bg-white rounded-2xl p-8 text-center fade-in shadow-lg">
+                        <div class="text-6xl mb-6">🎉</div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Party Makeup</h3>
+                        <p class="text-gray-600 mb-6">Makeup glamour untuk acara pesta, ulang tahun, atau event spesial</p>
+                        <div class="text-3xl font-bold text-pink-600 mb-6">Rp 800.000</div>
+                        <ul class="text-left text-gray-600 space-y-2 mb-6">
+                            <li>✨ Konsultasi style</li>
+                            <li>✨ Makeup glamour</li>
+                            <li>✨ Eyelashes premium</li>
+                            <li>✨ Touch up 1x</li>
+                            <li>✨ Hairdo simple</li>
+                        </ul>
+                        <button onclick="selectService('Party Makeup')" class="w-full btn-primary text-white py-3 rounded-full font-semibold">
+                            Pilih Paket
+                        </button>
+                    </div>
+
+                    <!-- Natural Makeup -->
+                    <div class="service-card bg-white rounded-2xl p-8 text-center fade-in shadow-lg">
+                        <div class="text-6xl mb-6">🌸</div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Natural Makeup</h3>
+                        <p class="text-gray-600 mb-6">Makeup natural untuk wisuda, photoshoot, atau acara formal</p>
+                        <div class="text-3xl font-bold text-pink-600 mb-6">Rp 500.000</div>
+                        <ul class="text-left text-gray-600 space-y-2 mb-6">
+                            <li>✨ Makeup natural</li>
+                            <li>✨ Base makeup tahan lama</li>
+                            <li>✨ Eyelashes natural</li>
+                            <li>✨ Lip treatment</li>
+                            <li>✨ Setting spray</li>
+                        </ul>
+                        <button onclick="selectService('Natural Makeup')" class="w-full btn-primary text-white py-3 rounded-full font-semibold">
+                            Pilih Paket
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Additional Services -->
+                <div class="bg-white rounded-3xl p-8 md:p-12 fade-in shadow-lg">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Layanan Tambahan</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center p-4 bg-pink-50 rounded-xl">
+                                <span class="font-semibold text-gray-800">💇‍♀️ Hairdo Elaborate</span>
+                                <span class="text-pink-600 font-bold">+Rp 200.000</span>
+                            </div>
+                            <div class="flex justify-between items-center p-4 bg-pink-50 rounded-xl">
+                                <span class="font-semibold text-gray-800">👗 Attire Consultation</span>
+                                <span class="text-pink-600 font-bold">+Rp 100.000</span>
+                            </div>
+                            <div class="flex justify-between items-center p-4 bg-pink-50 rounded-xl">
+                                <span class="font-semibold text-gray-800">📸 Photo Session Makeup</span>
+                                <span class="text-pink-600 font-bold">+Rp 150.000</span>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center p-4 bg-pink-50 rounded-xl">
+                                <span class="font-semibold text-gray-800">💅 Nail Art Simple</span>
+                                <span class="text-pink-600 font-bold">+Rp 75.000</span>
+                            </div>
+                            <div class="flex justify-between items-center p-4 bg-pink-50 rounded-xl">
+                                <span class="font-semibold text-gray-800">✨ Glitter Makeup</span>
+                                <span class="text-pink-600 font-bold">+Rp 50.000</span>
+                            </div>
+                            <div class="flex justify-between items-center p-4 bg-pink-50 rounded-xl">
+                                <span class="font-semibold text-gray-800">🎭 Special Effects</span>
+                                <span class="text-pink-600 font-bold">+Rp 300.000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Booking Page -->
+    <div id="booking" class="page">
+        <section class="py-20 gradient-bg min-h-screen">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12 fade-in">
+                    <h1 class="text-5xl font-bold text-gray-800 mb-4">Pesan Layanan Makeup</h1>
+                    <p class="text-xl text-gray-600">Isi form di bawah untuk memesan layanan makeup impian Anda</p>
+                </div>
+
+                <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12 fade-in">
+                    <form id="booking-form" class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Nama Lengkap</label>
+                                <input type="text" id="fullName" required class="w-full px-4 py-3 border-2 border-pink-200 rounded-xl focus:border-pink-500 focus:outline-none transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Nomor WhatsApp</label>
+                                <input type="tel" id="whatsapp" required class="w-full px-4 py-3 border-2 border-pink-200 rounded-xl focus:border-pink-500 focus:outline-none transition-colors">
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Jenis Layanan</label>
+                                <select id="serviceType" required class="w-full px-4 py-3 border-2 border-pink-200 rounded-xl focus:border-pink-500 focus:outline-none transition-colors">
+                                    <option value="">Pilih Layanan</option>
+                                    <option value="Wedding Makeup">Wedding Makeup - Rp 1.500.000</option>
+                                    <option value="Party Makeup">Party Makeup - Rp 800.000</option>
+                                    <option value="Natural Makeup">Natural Makeup - Rp 500.000</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Tanggal Acara</label>
+                                <input type="date" id="eventDate" required class="w-full px-4 py-3 border-2 border-pink-200 rounded-xl focus:border-pink-500 focus:outline-none transition-colors">
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Waktu Mulai</label>
+                                <input type="time" id="startTime" required class="w-full px-4 py-3 border-2 border-pink-200 rounded-xl focus:border-pink-500 focus:outline-none transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Lokasi</label>
+                                <select id="location" required class="w-full px-4 py-3 border-2 border-pink-200 rounded-xl focus:border-pink-500 focus:outline-none transition-colors">
+                                    <option value="">Pilih Lokasi</option>
+                                    <option value="Studio">Di Studio (+Rp 0)</option>
+                                    <option value="Rumah Client">Di Rumah Client (+Rp 100.000)</option>
+                                    <option value="Hotel">Di Hotel (+Rp 150.000)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Alamat Lengkap</label>
+                            <textarea id="address" rows="3" class="w-full px-4 py-3 border-2 border-pink-200 rounded-xl focus:border-pink-500 focus:outline-none transition-colors" placeholder="Masukkan alamat lengkap jika memilih layanan di rumah/hotel"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Catatan Khusus</label>
+                            <textarea id="notes" rows="3" class="w-full px-4 py-3 border-2 border-pink-200 rounded-xl focus:border-pink-500 focus:outline-none transition-colors" placeholder="Ceritakan style makeup yang Anda inginkan atau request khusus lainnya"></textarea>
+                        </div>
+
+                        <div class="bg-pink-50 p-6 rounded-xl">
+                            <h4 class="font-semibold text-gray-800 mb-2">Ringkasan Pesanan:</h4>
+                            <div id="orderSummary" class="text-gray-600">
+                                Silakan pilih layanan untuk melihat ringkasan pesanan
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full btn-primary text-white py-4 rounded-xl font-semibold text-lg">
+                            Kirim Pesanan
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact" class="page">
+        <section class="py-20 bg-white min-h-screen">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in">
+                    <h1 class="text-5xl font-bold text-gray-800 mb-4">Hubungi Kami</h1>
+                    <p class="text-xl text-gray-600">Punya pertanyaan? Jangan ragu untuk menghubungi kami</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8 mb-16">
+                    <div class="text-center fade-in">
+                        <div class="w-20 h-20 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <span class="text-3xl">📱</span>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">WhatsApp</h3>
+                        <p class="text-lg text-gray-600 mb-2">+62 812-3456-7890</p>
+                        <p class="text-sm text-gray-500 mb-4">Respon cepat 24/7</p>
+                        <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" class="btn-primary text-white px-6 py-2 rounded-full font-semibold text-sm">
+                            Chat Sekarang
+                        </a>
+                    </div>
+
+                    <div class="text-center fade-in">
+                        <div class="w-20 h-20 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <span class="text-3xl">📍</span>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Alamat Studio</h3>
+                        <p class="text-lg text-gray-600">Jln Mamoa Ria</p>
+                        <p class="text-lg text-gray-600 mb-4">Makassar, Sulawesi Selatan 55555</p>
+                        <button class="border-2 border-pink-500 text-pink-500 px-6 py-2 rounded-full font-semibold text-sm hover:bg-pink-50 transition-all">
+                            Lihat Maps
+                        </button>
+                    </div>
+
+                    <div class="text-center fade-in">
+                        <div class="w-20 h-20 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <span class="text-3xl">🕒</span>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Jam Operasional</h3>
+                        <p class="text-lg text-gray-600">Senin - Minggu</p>
+                        <p class="text-lg text-gray-600 mb-4">08:00 - 20:00 WIB</p>
+                        <div class="text-sm text-gray-500">
+                            <p>Appointment by reservation</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="max-w-4xl mx-auto">
+                    <div class="bg-gradient-to-br from-pink-50 to-purple-50 rounded-3xl p-8 md:p-12 fade-in shadow-lg">
+                        <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Kirim Pesan</h2>
+                        <form id="contact-form" class="space-y-6">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">Nama Lengkap</label>
+                                    <input type="text" required class="w-full px-4 py-3 border-2 border-pink-200 rounded-xl focus:border-pink-500 focus:outline-none transition-colors bg-white">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">Email</label>
+                                    <input type="email" required class="w-full px-4 py-3 border-2 border-pink-200 rounded-xl focus:border-pink-500 focus:outline-none transition-colors bg-white">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Subjek</label>
+                                <input type="text" required class="w-full px-4 py-3 border-2 border-pink-200 rounded-xl focus:border-pink-500 focus:outline-none transition-colors bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Pesan</label>
+                                <textarea rows="5" required class="w-full px-4 py-3 border-2 border-pink-200 rounded-xl focus:border-pink-500 focus:outline-none transition-colors bg-white" placeholder="Tulis pesan Anda di sini..."></textarea>
+                            </div>
+                            <button type="submit" class="w-full btn-primary text-white py-4 rounded-xl font-semibold text-lg">
+                                Kirim Pesan
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Social Media -->
+                <div class="mt-16 text-center fade-in">
+                    <div class="bg-gradient-to-r from-pink-50 to-purple-50 rounded-2xl p-8">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Follow Social Media Kami</h3>
+                        <p class="text-gray-600 mb-6">Lihat hasil karya makeup terbaru dan dapatkan tips kecantikan</p>
+                        <div class="flex justify-center space-x-4">
+                            <a href="https://instagram.com/gisamua" target="_blank" rel="noopener noreferrer" class="inline-flex items-center btn-primary text-white px-6 py-3 rounded-full font-semibold">
+                                <span class="mr-2">📸</span>
+                                Instagram
+                            </a>
+                            <a href="https://tiktok.com/@gisamua" target="_blank" rel="noopener noreferrer" class="inline-flex items-center border-2 border-pink-500 text-pink-500 px-6 py-3 rounded-full font-semibold hover:bg-pink-50 transition-all">
+                                <span class="mr-2">🎵</span>
+                                TikTok
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="mb-6">
+                <span class="text-3xl font-bold text-pink-400">💄 GISAMUA Makeup Studio</span>
+            </div>
+            <p class="text-gray-400 mb-6">Wujudkan makeup impian Anda bersama kami</p>
+            <div class="border-t border-gray-700 pt-6">
+                <p class="text-gray-500">&copy; 2024 GISAMUA Makeup Studio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-2xl p-8 max-w-md mx-4 text-center">
+            <div class="text-6xl mb-4">✨</div>
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">Pesanan Berhasil Dikirim!</h3>
+            <p class="text-gray-600 mb-6">Terima kasih! Kami akan segera menghubungi Anda untuk konfirmasi pesanan.</p>
+            <button onclick="closeModal()" class="btn-primary text-white px-6 py-3 rounded-full font-semibold">
+                Tutup
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Page navigation system
+        let currentPage = 'home';
+
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                targetPage.classList.add('page-transition');
+                
+                // Remove transition class after animation
+                setTimeout(() => {
+                    targetPage.classList.remove('page-transition');
+                }, 500);
+            }
+            
+            // Update navigation active state
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Add active class to current nav link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.textContent.toLowerCase().includes(getPageTitle(pageId).toLowerCase())) {
+                    link.classList.add('active');
+                }
+            });
+            
+            currentPage = pageId;
+            
+            // Close mobile menu if open
+            document.getElementById('mobile-menu').classList.add('hidden');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Re-observe fade-in elements for the new page
+            setTimeout(() => {
+                observeFadeInElements();
+            }, 100);
+        }
+
+        function getPageTitle(pageId) {
+            const titles = {
+                'home': 'Beranda',
+                'services': 'Layanan',
+                'booking': 'Pemesanan',
+                'contact': 'Kontak'
+            };
+            return titles[pageId] || 'Beranda';
+        }
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        function observeFadeInElements() {
+            // Clear previous observations
+            observer.disconnect();
+            
+            // Observe only visible page elements
+            const activePage = document.querySelector('.page.active');
+            if (activePage) {
+                activePage.querySelectorAll('.fade-in').forEach(el => {
+                    observer.observe(el);
+                });
+            }
+        }
+
+        // Service selection
+        function selectService(serviceName) {
+            showPage('booking');
+            setTimeout(() => {
+                document.getElementById('serviceType').value = serviceName;
+                updateOrderSummary();
+            }, 100);
+        }
+
+        // Update order summary
+        function updateOrderSummary() {
+            const serviceType = document.getElementById('serviceType').value;
+            const location = document.getElementById('location').value;
+            const eventDate = document.getElementById('eventDate').value;
+            
+            let summary = '';
+            let total = 0;
+            
+            if (serviceType) {
+                summary += `<div class="flex justify-between mb-2"><span>Layanan:</span><span>${serviceType}</span></div>`;
+                
+                if (serviceType === 'Wedding Makeup') total = 1500000;
+                else if (serviceType === 'Party Makeup') total = 800000;
+                else if (serviceType === 'Natural Makeup') total = 500000;
+            }
+            
+            if (location) {
+                summary += `<div class="flex justify-between mb-2"><span>Lokasi:</span><span>${location}</span></div>`;
+                
+                if (location === 'Rumah Client') total += 100000;
+                else if (location === 'Hotel') total += 150000;
+            }
+            
+            if (eventDate) {
+                const date = new Date(eventDate);
+                const formattedDate = date.toLocaleDateString('id-ID', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+                summary += `<div class="flex justify-between mb-2"><span>Tanggal:</span><span>${formattedDate}</span></div>`;
+            }
+            
+            if (total > 0) {
+                summary += `<div class="border-t pt-2 mt-2"><div class="flex justify-between font-semibold text-lg"><span>Total:</span><span class="text-pink-600">Rp ${total.toLocaleString('id-ID')}</span></div></div>`;
+            }
+            
+            document.getElementById('orderSummary').innerHTML = summary || 'Silakan pilih layanan untuk melihat ringkasan pesanan';
+        }
+
+        // Form submission handlers
+        function setupFormHandlers() {
+            // Booking form
+            const bookingForm = document.getElementById('booking-form');
+            if (bookingForm) {
+                // Form event listeners
+                document.getElementById('serviceType').addEventListener('change', updateOrderSummary);
+                document.getElementById('location').addEventListener('change', updateOrderSummary);
+                document.getElementById('eventDate').addEventListener('change', updateOrderSummary);
+
+                bookingForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form data
+                    const formData = {
+                        fullName: document.getElementById('fullName').value,
+                        whatsapp: document.getElementById('whatsapp').value,
+                        serviceType: document.getElementById('serviceType').value,
+                        eventDate: document.getElementById('eventDate').value,
+                        startTime: document.getElementById('startTime').value,
+                        location: document.getElementById('location').value,
+                        address: document.getElementById('address').value,
+                        notes: document.getElementById('notes').value
+                    };
+                    
+                    // Validate required fields
+                    if (!formData.fullName || !formData.whatsapp || !formData.serviceType || !formData.eventDate || !formData.startTime || !formData.location) {
+                        alert('Mohon lengkapi semua field yang wajib diisi');
+                        return;
+                    }
+                    
+                    // Show loading state
+                    const submitBtn = this.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.textContent;
+                    submitBtn.textContent = 'Mengirim...';
+                    submitBtn.disabled = true;
+                    
+                    // Send to Google Sheets
+                    sendToGoogleSheets(formData)
+                        .then(() => {
+                            // Show success modal
+                            document.getElementById('successModal').classList.remove('hidden');
+                            document.getElementById('successModal').classList.add('flex');
+                            
+                            // Reset form
+                            this.reset();
+                            updateOrderSummary();
+                        })
+                        .catch((error) => {
+                            console.error('Error:', error);
+                            alert('Terjadi kesalahan saat mengirim data. Silakan coba lagi atau hubungi kami langsung via WhatsApp.');
+                        })
+                        .finally(() => {
+                            // Reset button state
+                            submitBtn.textContent = originalText;
+                            submitBtn.disabled = false;
+                        });
+                });
+
+                // Set minimum date to today
+                document.getElementById('eventDate').min = new Date().toISOString().split('T')[0];
+            }
+
+            // Contact form
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Terima kasih! Pesan Anda telah dikirim. Kami akan segera menghubungi Anda.');
+                    this.reset();
+                });
+            }
+        }
+
+        // Google Sheets Integration
+        async function sendToGoogleSheets(formData) {
+            // URL Google Apps Script Web App
+            const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwBMbVrwJlODDGef8B_FnI06hRFd2DtL4edEOvElITgNTdj8i9BAPl9JWIuyuMfLOY1/exec';
+            
+            // Calculate total price
+            let totalPrice = 0;
+            if (formData.serviceType === 'Wedding Makeup') totalPrice = 1500000;
+            else if (formData.serviceType === 'Party Makeup') totalPrice = 800000;
+            else if (formData.serviceType === 'Natural Makeup') totalPrice = 500000;
+            
+            if (formData.location === 'Rumah Client') totalPrice += 100000;
+            else if (formData.location === 'Hotel') totalPrice += 150000;
+            
+            // Prepare data for Google Sheets
+            const dataToSend = {
+                timestamp: new Date().toLocaleString('id-ID'),
+                fullName: formData.fullName,
+                whatsapp: formData.whatsapp,
+                serviceType: formData.serviceType,
+                eventDate: formData.eventDate,
+                startTime: formData.startTime,
+                location: formData.location,
+                address: formData.address || '-',
+                notes: formData.notes || '-',
+                totalPrice: totalPrice,
+                status: 'Pending'
+            };
+            
+            try {
+                const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(dataToSend)
+                });
+                
+                // Note: no-cors mode doesn't allow reading response, so we assume success
+                return Promise.resolve();
+            } catch (error) {
+                throw error;
+            }
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('successModal').classList.add('hidden');
+            document.getElementById('successModal').classList.remove('flex');
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            observeFadeInElements();
+            setupFormHandlers();
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98a20cc3b0ccfd89',t:'MTc1OTcyMTEwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
